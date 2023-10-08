@@ -20,8 +20,9 @@ $(document).ready(function () {
     myList = [];
   });
 
-  const apiStatus = $('DIV#api_status');
-  $.ajax('http://0.0.0.0:5001/api/v1/status/').done(function (data) {
+  const apiStatus = $('div#api_status');
+  const url = 'http://' + window.location.hostname + ':5001/api/v1/status/';
+  $.get(url, function (data) {
     if (data.status === 'OK') {
       apiStatus.addClass('available');
     } else {
