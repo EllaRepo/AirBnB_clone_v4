@@ -19,19 +19,62 @@ $(document).ready(function () {
     const output = myList.join(', ');
     $('div.amenities > h4').text(output);
   });
-  const apiStatus = $('DIV#api_status');
-  $.ajax('http://0.0.0.0:5001/api/v1/status/').done(function (data) {
+
+  const apiStatus = $('div#api_status');
+  const url = 'http://' + window.location.hostname;
+  $.get(url + ':5001/api/v1/status/', function (data) {
     if (data.status === 'OK') {
       apiStatus.addClass('available');
     } else {
       apiStatus.removeClass('available');
     }
   });
+
+  $.ajax({
+    url: url + ':5001/api/v1/places_search/',
+    type: 'POST',
+    data: '{}',
+    contentType: 'application/json',
+    dataType: 'json',
+    success: function (data) {
+      $('section.places').append(data.map(place => {
+        return `<article>
+                    <div class="title_box">
+                        <h2>${place.name}</h2>
+                        <div class="price_by_night">
+                            ${place.price_by_night}
+                        </div>
+                    </div>
+                    <div class="information">
+                        <div class="max_guest">
+                            <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+                            </br>
+                            ${place.max_guest} Guests
+                        </div>
+                        <div class="number_rooms">
+                            <i class="fa fa-bed fa-3x" aria-hidden="true"></i>
+                            </br>
+                            ${place.number_rooms} Bedrooms
+                        </div>
+                        <div class="number_bathrooms">
+                            <i class="fa fa-bath fa-3x" aria-hidden="true"></i>
+                            </br>
+                            ${place.number_bathrooms} Bathrooms
+                        </div>
+                    </div>
+                    <div class="description">
+                        ${place.description}
+                    </div>
+                </article>`;
+      }));
+    }
+  });
+
   function search (theAmenities) {
     let datas = {};
     if (theAmenities != null) { datas = { amenities: theAmenities }; }
     const placesSearch = $.ajax({
-      url: 'http://0.0.0.0:5001/api/v1/places_search/',
+      url: url + ':5001/api/v1/places_search/',
       dataType: 'json',
       contentType: 'application/json',
       method: 'POST',
@@ -66,14 +109,14 @@ $(document).ready(function () {
         article.append(information);
         const description = $("<div class='description'></div>").html(desc);
         article.append(description);
-        $('SECTION.places').append(article);
+        $('section.places').append(article);
       }
     });
   }
   search();
 
   $('.filters > button').click(function () {
-    $('SECTION.places').empty();
+    $('section.places').empty();
     search(myAmenities);
   });
 });
