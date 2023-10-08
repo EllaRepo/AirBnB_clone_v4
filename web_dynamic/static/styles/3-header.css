@@ -20,7 +20,8 @@ header .logo {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    }
+}
 
 #api_status.available{
     background-color: #ff545f;
+}
