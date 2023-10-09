@@ -92,11 +92,10 @@ $(document).ready(function () {
             myUser.done(function (userData) {
               let date = new Date(data[i].created_at);
               date = date.getDate() + 'th ' + ' ' + date.toLocaleString('default', { month: 'long' }) + ' ' + date.getFullYear();
-              review.parent().find('ul').append('<li><h3>From ' + userData.first_name + ' ' + userData.last_name + ' the ' + date + '</h3><p>' + data[i].text + '</p></li>');
+              review.parent().find('ul').append('<li><h3>From ' + userData.first_name + ' ' + userData.last_name + ' the ' + date + '</h3><br><p>' + data[i].text + '</p></li>');
             });
           }
         });
-        review.parent().find('ul').append('<li><h3>From Eliab Erango the 9th October, 2023 </h3><br><p>Fantastic place. It was clean, Adrienne was great (eventhough we did not meet in person) and everything went super smooth. Location is also greate if you like running and something a bit more quiet. I would suggest a car or take into consideration that you might have to Uber into the city from the location. Overall, would recommend the place anytime. </p></li>');
         $(this).text('hide');
       } else {
         $(this).text('show');
