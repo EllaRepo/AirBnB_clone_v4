@@ -103,3 +103,38 @@
 .amenities li input[type="checkbox"] {
     margin-right: 10px;
 }
+
+.reviews {
+    border-bottom: 1px solid #DDDDDD;
+    margin-top: 40px;
+    margin-bottom: 5%;
+}
+
+.places .reviews h2 {
+    font-size: 16px;
+    text-align: left;
+    margin-top: 0;
+}
+
+.reviews h2, span {
+    display: inline-block;
+}
+
+.places .reviews>ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+}
+
+.places .reviews ul li h3 {
+    margin-top: 0;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
+}
+
+.places .reviews ul li p {
+    padding-bottom: 5%;
+    margin-top: 0px;
+}
